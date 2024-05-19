@@ -1,0 +1,26 @@
+package ru.pish.inadapter.models.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ContactsDTO {
+
+    @NotBlank
+    private String Type;
+
+    private String Email;
+
+    private String Phone;
+
+    private AddressDTO Address;
+
+
+}

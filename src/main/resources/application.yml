@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: InAdapter
+  rabbitmq:
+    host: 45.141.102.127
+    port: 5672
+    username: eip
+    password: eip
+    virtual-host: /
+    connection-timeout: 6000
+    template:
+      exchange: PISH
+    queue:
+      rest-receive-request: REST.RECEIVE.REQUEST
+      soap-receive-request: SOAP.RECEIVE.REQUEST
+      transfering-receive-request: TRANSFERRING.RECEIVE.REQUEST
+      response-queue: RESPONSE.QUEUE
+      error-queue: ERROR.QUEUE
+
+
+
+cxf:
+  path: /cxf
+
+camel:
+  component:
+    spring-rabbitmq:
+      bridge-error-handler: true
+      prefetch-count: 1
+      max-concurrent-consumers: 1
+      concurrent-consumers: 1
+  dataformat:
+    jackson:
+      auto-discover-object-mapper: true
+
+service:
+  full-name: InAdapter (version java 17)
+  name: InAdapter
+  webservice_url: /receiveXml
+  login: Pish
+  password: PishPass

@@ -1,0 +1,95 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:doc="www.example.com/document">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <doc:Employees>
+            <!--Zero or more repetitions:-->
+            <Employee>
+                <Uuid>2abb7a46-cb49-46e3-82e4-234949a91731</Uuid>
+                <FirstName>Даниил</FirstName>
+                <LastName>Иванов</LastName>
+                <MiddleName>Анатольевич</MiddleName>
+                <Birthdate>2001-01-01</Birthdate>
+                <JobInformation>
+                    <WorkType>REMOTE</WorkType>
+                    <ChiefId>3deeee0c-0f3f-4018-b000-e8db97266cb2</ChiefId>
+                    <Department>
+                        <Uuid>b07419fe-ea50-45c2-aded-6f65e1b064ef</Uuid>
+                        <Description>Отделение разработки коммерческого ПО</Description>
+                    </Department>
+                    <Position>
+                        <Uuid>80b48472-7ff8-4367-b12b-a8edb91620a9</Uuid>
+                        <Description>Студент</Description>
+                    </Position>
+                    <Salary>
+                        <amount>40000</amount>
+                        <currency>RUB</currency>
+                    </Salary>
+                    <EntryDate>2023-09-01</EntryDate>
+                    <EndDate>2001-01-01</EndDate>
+                </JobInformation>
+                <PersonalInformation>
+                    <JobNumber>ST-7364-12</JobNumber>
+                    <Contacts>
+                        <!--Zero or more repetitions:-->
+                        <Contact>
+                            <Type>HOME</Type>
+                            <Email>timare40@gmail.com</Email>
+                            <Phone>+79010554520</Phone>
+                            <Address>
+                                <street>Мишкольцская</street>
+                                <city>Вологда</city>
+                                <state>Вологодская обл.</state>
+                                <zip>160013</zip>
+                            </Address>
+                        </Contact>
+                        <Contact>
+                            <Type>WORK</Type>
+                            <Email>work@mail.ru</Email>
+                            <Phone>8-495-47-63-59</Phone>
+                            <Address>
+                                <street>Ленина</street>
+                                <city>Москва</city>
+                                <state>Московская обл.</state>
+                                <zip>120032</zip>
+                            </Address>
+                        </Contact>
+                    </Contacts>
+                    <Skills>
+                        <!--Zero or more repetitions:-->
+                        <skill>
+                            <Category>language</Category>
+                            <Description>Rus</Description>
+                        </skill>
+                        <skill>
+                            <Category>language</Category>
+                            <Description>Eng</Description>
+                        </skill>
+                        <skill>
+                            <Category>development</Category>
+                            <Description>Java, Spring, Docker</Description>
+                        </skill>
+                        <skill>
+                            <Category>hobbies</Category>
+                            <Description>путешествия, пить пиво</Description>
+                        </skill>
+                    </Skills>
+                    <Documents>
+                        <!--Zero or more repetitions:-->
+                        <document>
+                            <Type>PASSPORT</Type>
+                            <Description>паспорт</Description>
+                            <Number>12345</Number>
+                            <RegistrationDate>2021-02-02</RegistrationDate>
+                        </document>
+                        <document>
+                            <Type>INN</Type>
+                            <Description>ИНН</Description>
+                            <Number>00321321</Number>
+                            <RegistrationDate>2020-05-05</RegistrationDate>
+                        </document>
+                    </Documents>
+                </PersonalInformation>
+            </Employee>
+        </doc:Employees>
+    </soapenv:Body>
+</soapenv:Envelope>

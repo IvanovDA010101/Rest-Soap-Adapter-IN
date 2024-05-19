@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="www.example.com/document"
+        xmlns:tns="www.example.com/document"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" targetNamespace="www.example.com/document"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+            <xs:element name="Employees">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Employee" type="tns:EmployeeItem" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="EmployeeItem">
+                <xs:sequence>
+                    <xs:element name="Uuid" type="tns:guid"/>
+                    <xs:element name="FirstName" type="xs:string"/>
+                    <xs:element name="LastName" type="xs:string"/>
+                    <xs:element name="MiddleName" type="xs:string"/>
+                    <xs:element name="Birthdate" type="xs:date"/>
+                    <xs:element name="JobInformation" type="tns:JobType"/>
+                    <xs:element name="PersonalInformation" type="tns:PersonalInformationType"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="PersonalInformationType">
+                <xs:sequence>
+                    <xs:element name="JobNumber" type="xs:string"/>
+                    <xs:element name="Contacts" type="tns:ContactsType"/>
+                    <xs:element name="Skills" type="tns:SkillsType"/>
+                    <xs:element name="Documents" type="tns:DocumentsType"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="DocumentsType">
+                <xs:sequence>
+                    <xs:element name="document" type="tns:DocumentItem" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="DocumentItem">
+                <xs:sequence>
+                    <xs:element name="Type" type="tns:DocumentType"/>
+                    <xs:element name="Description" type="xs:string"/>
+                    <xs:element name="Number" type="xs:string"/>
+                    <xs:element name="RegistrationDate" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:simpleType name="DocumentType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PASSPORT"/>
+                    <xs:enumeration value="INN"/>
+                    <xs:enumeration value="SNILS"/>
+                    <xs:enumeration value="DL"/>
+                    <xs:enumeration value="DOC"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:complexType name="SkillsType">
+                <xs:sequence>
+                    <xs:element name="skill" type="tns:SkillItem" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="SkillItem">
+                <xs:sequence>
+                    <xs:element name="Category" type="tns:CategoryType"/>
+                    <xs:element name="Description" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:simpleType name="CategoryType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="language"/>
+                    <xs:enumeration value="development"/>
+                    <xs:enumeration value="management"/>
+                    <xs:enumeration value="soft"/>
+                    <xs:enumeration value="hobbies"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+
+            <xs:complexType name="JobType">
+                <xs:sequence>
+                    <xs:element name="WorkType" type="tns:WorkTypeEnum"/>
+                    <xs:element name="ChiefId" type="tns:guid"/>
+                    <xs:element name="Department" type="tns:DescriptionType"/>
+                    <xs:element name="Position" type="tns:DescriptionType"/>
+                    <xs:element name="Salary" type="tns:MoneyType"/>
+                    <xs:element name="EntryDate" type="xs:date"/>
+                    <xs:element name="EndDate" type="xs:date" nillable="true" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="MoneyType">
+                <xs:sequence>
+                    <xs:element name="amount" type="xs:decimal"/>
+                    <xs:element name="currency" type="tns:CurrencyType"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:simpleType name="CurrencyType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="USD"/>
+                    <xs:enumeration value="RUB"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:simpleType name="WorkTypeEnum">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="PERMANENT"/>
+                    <xs:enumeration value="REMOTE"/>
+                    <xs:enumeration value="TEMPORARY"/>
+                    <xs:enumeration value="PART-TIME"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:complexType name="ContactsType">
+                <xs:sequence>
+                    <xs:element name="Contact" type="tns:ContactItem" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ContactItem">
+                <xs:sequence>
+                    <xs:element name="Type" type="tns:ContactType"/>
+                    <xs:element name="Email" type="tns:emailType"/>
+                    <xs:element name="Phone" type="xs:string"/>
+                    <xs:element name="Address" type="tns:AddressType"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:simpleType name="ContactType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="HOME"/>
+                    <xs:enumeration value="WORK"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:simpleType name="emailType">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:simpleType name="guid">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:complexType name="DescriptionType">
+                <xs:sequence>
+                    <xs:element name="Uuid" type="tns:guid"/>
+                    <xs:element name="Description" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="AddressType">
+                <xs:sequence>
+                    <xs:element name="street" type="xs:string"/>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element name="state" type="xs:string"/>
+                    <xs:element name="zip" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:element name="EmployeeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Response" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+
+
+    <wsdl:message name="GetEmployeeRequest">
+        <wsdl:part name="parameters" element="tns:Employees"/>
+    </wsdl:message>
+    <wsdl:message name="GetEmployeeResponse">
+        <wsdl:part name="parameter" element="tns:EmployeeResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="IEmployeePortType">
+        <wsdl:operation name="GetEmployee">
+            <wsdl:input message="tns:GetEmployeeRequest"/>
+            <wsdl:output message="tns:GetEmployeeResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="EmployeeBinding" type="tns:IEmployeePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetEmployee">
+            <soap:operation soapAction="http://www.example.com/document/GetEmployee" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="EmployeeService">
+        <wsdl:port name="EmployeePort" binding="tns:EmployeeBinding">
+            <soap:address location="http://localhost:8080/cxf/EmployeeService"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
